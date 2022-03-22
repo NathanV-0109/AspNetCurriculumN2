@@ -1,0 +1,538 @@
+﻿@model AllInformationViewModel
+<main>
+
+    <!-- Formulário principal -->
+    <form asp-action="Salvar">
+
+        <!-- Dados pessoais -->
+
+        <div class="card mb-3">
+
+            <div class="card-header">Dados Pessoais</div>
+
+            <div class="card-body">
+
+                <!-- ID da pessoa -->
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="form-label my-1" for="id-Pessoa">Código da Pessoa</label>
+                        <input class="form-control" type="text" name="Id" id="id-Pessoa" value="@Model.Pessoa.Id">
+                    </div>
+                </div>
+
+                <div class="form-row">
+
+                    <!--
+                    Nome da pessoa (Nome)
+                    CPF da pessoa (CPF)
+                -->
+                    <div class="form-group col-md-10">
+                        <label class="form-label my-1" for="nome-pessoa">Nome</label>
+                        <input class="form-control" type="text" name="Nome" id="nome-pessoa" value="@Model.Pessoa.Nome">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label class="form-label" for="cpf">CPF</label>
+                        <input class="form-control" type="text" name="CPF" id="cpf" value="@Model.Pessoa.CPF">
+                    </div>
+                </div>
+
+                <!-- Telefone (Telefone) -->
+
+                <label class="form-label my-1" for="telefone">Telefone</label>
+                <input class="form-control my-1" type="text" name="Telefone" id="telefone" value="@Model.Pessoa.Telefone">
+
+                <!-- E-mail (Email) -->
+
+                <label class="form-label my-1" for="email">E-mail</label>
+                <input class="form-control my-1" type="text" name="Email" id="email" value="@Model.Pessoa.Email">
+
+                <!-- Pretensão Salarial (PretensaoSalarial) -->
+
+                <label class="form-label my-1" for="salario">Pretensão Salarial</label>
+                <input class="form-control my-1" type="number" name="PretensaoSalarial" id="salario" step="0.01" value="@Model.Pessoa.PretensaoSalarial">
+
+                <!-- Cargo Pretendido (CargoPretendido) -->
+
+                <label class="form-label my-1" for="cargo">Cargo Pretendido</label>
+                <input class="form-control my-1" type="text" name="CargoPretendido" id="cargo" value="@Model.Pessoa.CargoPretendido">
+
+            </div>
+
+        </div>
+
+        <!-- Formação -->
+
+        <div class="card mb-3">
+            <div class="card-header">Formação</div>
+
+            <div class="card-body">
+
+                <!--
+                Código da Formação                
+                Nome do Curso (NomeCurso_N)
+                Mês (Mes_N)
+                Ano (Ano_N)
+            -->
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="form-label my-1" for="id-Formacao">Código da Formação</label>
+                        <input class="form-control" type="text" name="FormacaoId" id="id-Formacao" value="@Model.Formacao.FormacaoId">
+                    </div>
+                </div>
+
+                
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label my-1" for="nome-curso-1">Nome do Curso</label>
+                        <input type="text" name="NomeCurso_1" id="nome-curso-1" class="form-control my-1" value="@Model.Formacao.NomeCurso_1" >
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="mes-1">Mês da formação</label>
+                        <select class="form-control" id="mes-1" name="MesFormacao_1" value="">
+                            @{
+                                string[] months = {
+                                    "Janeiro", "Fevereiro", "Março", "Abril",
+                                    "Maio", "Junho", "Julho", "Agosto",
+                                    "Setembro", "Outubro", "Novembro", "Dezembro"
+                                };
+
+                                for (int j = 0; j < months.Length; j++)
+                                {
+                                    if (Model.Formacao.MesFormacao_1 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@months[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@months[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="ano-1">Ano da formação</label>
+                        <input type="number" class="form-control" id="ano-1" name="AnoFormacao_1" value="@Model.Formacao.AnoFormacao_1" min="1900" />
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label my-1" for="nome-curso-2">Nome do Curso</label>
+                        <input type="text" name="NomeCurso_2" id="nome-curso-2" class="form-control my-1" value="@Model.Formacao.NomeCurso_2" >
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="mes-2">Mês da formação</label>
+                        <select class="form-control" id="mes-2" name="MesFormacao_2" value="@Model.Formacao.MesFormacao_2">
+                            @{
+                                for (int j = 0; j < months.Length; j++)
+                                {
+                                    if (Model.Formacao.MesFormacao_2 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@months[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@months[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="ano-2">Ano da formação</label>
+                        <input type="number" class="form-control" id="ano-2" name="AnoFormacao_2" value="@Model.Formacao.AnoFormacao_2" min="1900" />
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label my-1" for="nome-curso-3">Nome do Curso</label>
+                        <input type="text" name="NomeCurso_3" id="nome-curso-3" class="form-control my-1" value="@Model.Formacao.NomeCurso_3" >
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="mes-3">Mês da formação</label>
+                        <select class="form-control" id="mes-3" name="MesFormacao_3" value="@Model.Formacao.MesFormacao_3">
+                            @{
+                                
+                                for (int j = 0; j < months.Length; j++)
+                                {
+                                    if (Model.Formacao.MesFormacao_3 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@months[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@months[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="ano-3">Ano da formação</label>
+                        <input type="number" class="form-control" id="ano-3" name="AnoFormacao_3" value="@Model.Formacao.AnoFormacao_3" min="1900" />
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label my-1" for="nome-curso-4">Nome do Curso</label>
+                        <input type="text" name="NomeCurso_4" id="nome-curso-4" class="form-control my-1" value="@Model.Formacao.NomeCurso_4" >
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="mes-4">Mês da formação</label>
+                        <select class="form-control" id="mes-4" name="MesFormacao_4" value="@Model.Formacao.MesFormacao_4">
+                            @{
+                                for (int j = 0; j < months.Length; j++)
+                                {
+                                    if (Model.Formacao.MesFormacao_4 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@months[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@months[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="ano-4">Ano da formação</label>
+                        <input type="number" class="form-control" id="ano-4" name="AnoFormacao_4" value="@Model.Formacao.AnoFormacao_4" min="1900" />
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label my-1" for="nome-curso-5">Nome do Curso</label>
+                        <input type="text" name="NomeCurso_5" id="nome-curso-5" class="form-control my-1" value="@Model.Formacao.NomeCurso_5" >
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="mes-5">Mês da formação</label>
+                        <select class="form-control" id="mes-5" name="MesFormacao_5" value="@Model.Formacao.MesFormacao_5">
+                            @{
+                                for (int j = 0; j < months.Length; j++)
+                                {
+                                    if (Model.Formacao.MesFormacao_5 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@months[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@months[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label" for="ano-5">Ano da formação</label>
+                        <input type="number" class="form-control" id="ano-5" name="AnoFormacao_5" value="@Model.Formacao.AnoFormacao_5" min="1900" />
+                    </div>
+                </div>
+                
+                
+            </div>
+
+        </div>
+
+        <!-- Experiência -->
+
+        <div class="card mb-3">
+            <div class="card-header">Experiência</div>
+
+            <div class="card-body">
+
+                <!--
+                Código do Cargo                
+                Nome do Cargo (NomeCargo_N)
+                Nome da Empresa (NomeEmpresa_N)
+                Mês (Mes_N)
+                Ano (Ano_N)
+            -->
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="form-label my-1" for="id-Experiencia">Código da Experiência Profissional</label>
+                        <input class="form-control" type="text" name="ExperienciaId" id="id-Experiencia" value="@Model.Experiencia.ExperienciaId">
+                    </div>
+                </div>
+
+                
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-cargo-1">Nome do Cargo</label>
+                        <input type="text" name="NomeCargo_1" id="nome-cargo-1" class="form-control my-1" value="@Model.Experiencia.NomeCargo_1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-empresa-1">Nome da Empresa</label>
+                        <input type="text" name="NomeEmpresa_1" id="nome-empresa-1" class="form-control my-1" value="@Model.Experiencia.NomeEmpresa_1">
+                    </div>
+
+                </div>
+
+                <div class="form-row my-1">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-inicial-1">De</label>
+                        <input type="date" class="form-control" id="dt-inicial-1" name="DtInicio_1" value="@Model.Experiencia.DtInicio_1.ToString("yyyy-MM-dd")"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-final-1">Até</label>
+                        <input type="date" class="form-control" id="dt-final-1" name="DtFim_1" value="@Model.Experiencia.DtFim_1.ToString("yyyy-MM-dd")"/>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-cargo-2">Nome do Cargo</label>
+                        <input type="text" name="NomeCargo_2" id="nome-cargo-2" class="form-control my-1" value="@Model.Experiencia.NomeCargo_2">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-empresa-2">Nome da Empresa</label>
+                        <input type="text" name="NomeEmpresa_2" id="nome-empresa-2" class="form-control my-1" value="@Model.Experiencia.NomeEmpresa_2">
+                    </div>
+
+                </div>
+
+                <div class="form-row my-1">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-inicial-2">De</label>
+                        <input type="date" class="form-control" id="dt-inicial-2" name="DtInicio_2" value="@Model.Experiencia.DtInicio_2.ToString("yyyy-MM-dd")"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-final-2">Até</label>
+                        <input type="date" class="form-control" id="dt-final-2" name="DtFim_2" value="@Model.Experiencia.DtFim_2.ToString("yyyy-MM-dd")"/>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-cargo-3">Nome do Cargo</label>
+                        <input type="text" name="NomeCargo_3" id="nome-cargo-3" class="form-control my-1" value="@Model.Experiencia.NomeCargo_3">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nome-empresa-3">Nome da Empresa</label>
+                        <input type="text" name="NomeEmpresa_3" id="nome-empresa-3" class="form-control my-1" value="@Model.Experiencia.NomeEmpresa_3">
+                    </div>
+
+                </div>
+
+                <div class="form-row my-1">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-inicial-3">De</label>
+                        <input type="date" class="form-control" id="dt-inicial-3" name="DtInicio_3" value="@Model.Experiencia.DtInicio_3.ToString("yyyy-MM-dd")" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="dt-final-3">Até</label>
+                        <input type="date" class="form-control" id="dt-final-3" name="DtFim_3" value="@Model.Experiencia.DtFim_3.ToString("yyyy-MM-dd")"/>
+                    </div>
+                </div>
+                
+
+            </div>
+
+        </div>
+
+        <!-- Idioma -->
+
+        <div class="card mb-3">
+            <div class="card-header">Idioma</div>
+
+            <div class="card-body">
+
+                <!--
+        Código do Idioma
+        Idioma (Idioma_N)
+        Nível (NivelIdioma_N)
+    -->
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="form-label my-1" for="id-Idioma">Código do Idioma</label>
+                        <input class="form-control" type="text" name="IdiomaId" id="id-Idioma" value="@Model.Idioma.IdiomaId">
+                    </div>
+                </div>
+
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="idioma-1">Idioma</label>
+                        <input type="text" name="Idioma_1" id="idioma-1" class="form-control my-1" value="@Model.Idioma.Idioma_1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nivel-idioma-1">Nível</label>
+                        <select class="form-control my-1" name="Nivel_1" id="nivel-idioma-1">
+                            @{
+                                string[] languages = {
+                                    "Não informado", "Básico",
+                                    "Intermediário", "Avançado"
+                                };
+
+                                for (int j = 0; j < languages.Length; j++)
+                                {
+                                    if (Model.Idioma.Nivel_1 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@languages[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@languages[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="idioma-2">Idioma</label>
+                        <input type="text" name="Idioma_2" id="idioma-2" class="form-control my-1" value="@Model.Idioma.Idioma_2">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nivel-idioma-2">Nível</label>
+                        <select class="form-control my-1" name="Nivel_2" id="nivel-idioma-2">
+                            @{
+                                for (int j = 0; j < languages.Length; j++)
+                                {
+                                    if (Model.Idioma.Nivel_2 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@languages[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@languages[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="idioma-3">Idioma</label>
+                        <input type="text" name="Idioma_3" id="idioma-3" class="form-control my-1" value="@Model.Idioma.Idioma_3">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nivel-idioma-3">Nível</label>
+                        <select class="form-control my-1" name="Nivel_3" id="nivel-idioma-3">
+                            @{
+                                for (int j = 0; j < languages.Length; j++)
+                                {
+                                    if (Model.Idioma.Nivel_3 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@languages[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@languages[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="idioma-4">Idioma</label>
+                        <input type="text" name="Idioma_3" id="idioma-4" class="form-control my-1" value="@Model.Idioma.Idioma_4">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nivel-idioma-4">Nível</label>
+                        <select class="form-control my-1" name="Nivel_4" id="nivel-idioma-4">
+                            @{
+                                for (int j = 0; j < languages.Length; j++)
+                                {
+                                    if (Model.Idioma.Nivel_4 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@languages[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@languages[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row my-1">
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="idioma-5">Idioma</label>
+                        <input type="text" name="Idioma_5" id="idioma-5" class="form-control my-1" value="@Model.Idioma.Idioma_5">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label my-1" for="nivel-idioma-5">Nível</label>
+                        <select class="form-control my-1" name="Nivel_5" id="nivel-idioma-5">
+                            @{
+                                for (int j = 0; j < languages.Length; j++)
+                                {
+                                    if (Model.Idioma.Nivel_5 == (j + 1))
+                                    {
+                                        <option selected value=@(j + 1)>@languages[j]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@(j + 1)>@languages[j]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>                    
+
+        <br />
+        
+        <input type="submit" value="Salvar" class="btn btn-success" />
+        &nbsp;&nbsp;&nbsp;
+        <a href="~/Curriculo/Index" class="btn btn-success">Voltar</a>
+    </form>
+
+</main>
+<script>
+    
+</script>

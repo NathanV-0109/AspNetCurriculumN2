@@ -1,0 +1,44 @@
+﻿@using CadCurriculoMVC.Models
+
+<main>
+    <h1>Lista dos Dados de cada Currículo</h1>
+
+    <a href="~/Curriculo/create" style="padding-bottom: 10px" class="btn btn-primary">Novo Registro</a>
+    <br />
+    <br />
+
+    <div class="text-center justify-content-center">
+
+        <table class="table table-responsive-md table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Ações</th>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var dadosPessoais in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="/Curriculo/Edit?id=@dadosPessoais.Id" class="glyphicon">&#x270f;</a> - 
+                            <a href="javascript:apagarCurriculo(@dadosPessoais.Id)"><span class="glyphicon">&#9940;</span></a> - 
+                            <a href="/Curriculo/ViewCurriculum?id=@dadosPessoais.Id"><span class="glyphicon">&#128065;</span></a>
+                        </td>
+                        <td><h6>@dadosPessoais.CPF</h6></td>
+                        <td><h6>@dadosPessoais.Nome</h6></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+<script>
+ function apagarCurriculo(id)
+ {
+     if (confirm('Confirma a exclusão do registro?'))
+     location.href = 'Curriculo/Delete?id=' + id;
+ }
+</script>
